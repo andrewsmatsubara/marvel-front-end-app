@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import getCharacter from "./util/util";
+import React from "react";
+import { connect } from "react-redux";
 
-const App = () => {
-  useEffect(() => {
-    getCharacter();
-  }, []);
-  return (
-    <>
-      <h1>Hello, World!</h1>
-    </>
-  )
+class App extends React.Component {
+  render() {
+    const { newValue } = this.props;
+    return (
+      <div className="app">
+        <h1>Hello, World!</h1>
+        {console.log(newValue)}
+      </div>
+    )
+  }
 }
 
-export default App
+const mapStateToProps = store => ({
+  newValue: store.state
+});
+
+export default connect(mapStateToProps)(App);
