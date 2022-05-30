@@ -6,7 +6,7 @@ class CharacterPage extends React.Component {
     const { newValue } = this.props;
     return (
       <div className="character-page">
-        <h1>Hello, World!</h1>
+        <h1>Character Page</h1>
         {console.log(newValue)}
       </div>
     )
