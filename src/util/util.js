@@ -2,8 +2,10 @@ import { store } from '../redux/store/index'
 import CryptoJS from 'crypto-js';
 
 export const getTimestamp = async () => {
-  const currentDate = new Date();
-  const timestamp = currentDate.getTime();
+  const data = "01/06/2022";
+  const hora = "20:00:00";
+  const d = new Date(data + " " + hora);
+  const timestamp = d.getTime();
 
   return timestamp;
 }
