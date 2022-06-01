@@ -1,20 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getCharacter } from '../util/util'
 
 class MainPage extends React.Component {
+  componentDidMount() {
+    getCharacter();
+  }
   render() {
-    const { newValue } = this.props;
     return (
       <div className="main-page">
         <h1>Main Page</h1>
-        {console.log(newValue)}
+        <Link to='/'>
+          <button>
+            Voltar
+          </button>
+        </Link>
       </div>
     )
   }
 }
 
-const mapStateToProps = store => ({
-  newValue: store.state
-});
+// const mapStateToProps = store => ({
+//   newValue: store.state
+// });
 
-export default connect(mapStateToProps)(MainPage);
+export default MainPage;

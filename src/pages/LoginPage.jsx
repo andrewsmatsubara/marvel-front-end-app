@@ -2,11 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { accessAction } from "../redux/actions";
+import { Link } from 'react-router-dom';
 
 class LoginPage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     privateKeyValue: '',
-    publicKeyValue: ''
+    publicKeyValue: '',
   }
 
   inputChange = event => {
@@ -26,11 +31,16 @@ class LoginPage extends React.Component {
     const { privateKeyValue, publicKeyValue } = this.state;
 
     return (
-      <div className="login-page">
+      <form className="login-page" >
         <input type="text" placeholder="private_key" onChange={this.inputChange} />
         <input type="text" placeholder="public_key" onChange={this.inputChange} />
-        <button onClick={() => accessAction(privateKeyValue, publicKeyValue)}>Acessar</button>
-      </div>
+        <Link to='/main'>
+          <button
+            onClick={() => accessAction(privateKeyValue, publicKeyValue)}
+          >Acessar
+          </button>
+        </Link>
+      </form>
     )
   }
 }

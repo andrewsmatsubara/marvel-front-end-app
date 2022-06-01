@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 
 class CharacterPage extends React.Component {
   render() {
-    const { newValue } = this.props;
+    // const { newValue } = this.props;
     return (
       <div className="character-page">
         <h1>Character Page</h1>
-        {console.log(newValue)}
       </div>
     )
   }

@@ -1,7 +1,5 @@
-import { getCharacter } from "../../util/util";
-
 const initialState = {
-  newValue: getCharacter(),
+  newValue: '',
 }
 
 export const characterReducer = (state = initialState, action) => {

@@ -10,8 +10,8 @@ class App extends React.Component {
       <div className="app">
         <Routes>
           <Route exact path="/" element={<LoginPage />} />
-          <Route exact path="main" element={<MainPage />} />
-          <Route exact path="character" element={<CharacterPage />} />
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/character" element={<CharacterPage />} />
         </Routes>
       </div>
     )
