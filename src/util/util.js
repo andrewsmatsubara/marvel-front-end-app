@@ -45,6 +45,8 @@ export const getCharacter = async () => {
       window.alert('As credenciais estão incorretas!');
     }
 
+    console.log(result.data.results);
+
     return result.data.results;
   } catch (e) {
     console.log(e.message);
