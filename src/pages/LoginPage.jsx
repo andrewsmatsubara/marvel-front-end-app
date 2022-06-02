@@ -1,49 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { accessAction, characterAction } from "../redux/actions";
+import { accessAction } from "../redux/actions";
 import { Link } from 'react-router-dom';
-import { store } from "../redux/store";
 
-class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const LoginPage = ({ accessAction }) => {
+  const [privateKeyValue, setPrivateKeyValue] = useState();
+  const [publicKeyValue, setPublicKeyValue] = useState();
 
-  state = {
-    privateKeyValue: '',
-    publicKeyValue: '',
-  }
-
-  inputChange = event => {
+  const inputChange = event => {
     if (event.target.placeholder === 'private_key') {
-      this.setState({
-        privateKeyValue: event.target.value
-      });
+      setPrivateKeyValue(event.target.value);
     } else if (event.target.placeholder === 'public_key') {
-      this.setState({
-        publicKeyValue: event.target.value
-      });
+      setPublicKeyValue(event.target.value);
     }
   }
 
-  render() {
-    const { accessAction } = this.props;
-    const { privateKeyValue, publicKeyValue } = this.state;
-
-    return (
-      <form className="login-page" >
-        <input type="text" placeholder="private_key" onChange={this.inputChange} />
-        <input type="text" placeholder="public_key" onChange={this.inputChange} />
-        <Link to='/main'>
-          <button
-            onClick={() => accessAction(privateKeyValue, publicKeyValue)}
-          >Acessar
-          </button>
-        </Link>
-      </form>
-    )
-  }
+  return (
+    <form className="login-page" >
+      <input type="text" placeholder="private_key" onChange={(e) => inputChange(e)} />
+      <input type="text" placeholder="public_key" onChange={(e) => inputChange(e)} />
+      <Link to='/home'>
+        <button
+          onClick={() => accessAction(privateKeyValue, publicKeyValue)}
+        >Acessar
+        </button>
+      </Link>
+    </form>
+  )
 }
 
 const mapStateToProps = store => ({
@@ -51,6 +35,6 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ accessAction, characterAction }, dispatch);
+  bindActionCreators({ accessAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

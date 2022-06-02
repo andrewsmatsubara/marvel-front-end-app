@@ -1,6 +1,6 @@
 export const characterAction = value => ({
   type: 'CHARACTER_VALUE',
-  newValue: value
+  characterValue: value
 });
 
 export const accessAction = (privateValue, publicValue) => ({

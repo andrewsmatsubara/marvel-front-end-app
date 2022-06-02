@@ -1,5 +1,5 @@
 const initialState = {
-  newValue: '',
+  newCharacterValue: '',
 }
 
 export const characterReducer = (state = initialState, action) => {
@@ -7,7 +7,7 @@ export const characterReducer = (state = initialState, action) => {
     case 'CHARACTER_VALUE':
       return {
         ...state,
-        newValue: action.newValue
+        newCharacterValue: action.characterValue
       };
     default:
       return state;
