@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { accessAction } from "../redux/actions";
+import { accessAction, characterAction } from "../redux/actions";
 import { Link } from 'react-router-dom';
+import { store } from "../redux/store";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -50,6 +51,6 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ accessAction }, dispatch);
+  bindActionCreators({ accessAction, characterAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
