@@ -41,11 +41,9 @@ export const getCharacter = async () => {
     const response = await fetch(MARVEL_URL);
     const result = await response.json();
 
-    // if (result && result.code === 'InvalidCredentials') {
-    //   window.alert('As credenciais estão incorretas!');
-    // }
-
-    // console.log(result.data.results);
+    if (result && result.code === 'InvalidCredentials') {
+      window.alert('As credenciais estão incorretas!');
+    }
 
     return result.data.results;
   } catch (e) {

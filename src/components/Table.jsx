@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { getCharacter } from '../util/util'
+import React, { useEffect, useState } from "react";
+import { getCharacter } from '../util/util';
 
 export const Table = () => {
   const [characters, setCharacters] = useState([]);
@@ -20,14 +20,14 @@ export const Table = () => {
     <table>
       <tbody>
         <tr>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Última atualização</th>
+          <th style={{ border: '1px solid black' }} >Nome</th>
+          <th style={{ border: '1px solid black' }}>Descrição</th>
+          <th style={{ border: '1px solid black' }}>Última atualização</th>
         </tr>
         {characters.map((character) => <tr key={`${character.name}-info`}>
-          <td key={`${character.name}`}>{character.name}</td>
-          <td key={`${character.name}-description`}>{character.description}</td>
-          <td key={`${character.name}-last-modification`}>{character.modified}</td>
+          <td key={`${character.name}`} style={{ border: '1px solid black' }}>{character.name}</td>
+          <td key={`${character.name}-description`} style={{ border: '1px solid black' }}>{character.description}</td>
+          <td key={`${character.name}-last-modification`} style={{ border: '1px solid black' }}>{character.modified}</td>
         </tr>)}
       </tbody>
     </table>
