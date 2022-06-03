@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { store } from "../redux/store";
 import { getCharacter, getComicDescription } from "../util/util";
 import { Link } from "react-router-dom";
+import { Button } from "../components/Button";
 
 const CharacterPage = () => {
   const [characters, setCharacters] = useState([]);
@@ -11,37 +12,35 @@ const CharacterPage = () => {
   const reduxStore = store.getState();
   const characterName = reduxStore.reducers.characterState.newCharacterValue;
 
-  // const getDescription = async () => {
-  //   // pegar as resourceURI do personagem, fazer map para URI, retirar os ids, chamar os ids na função getComicDescription
+  const getDescription = () => {
+    // pegar as resourceURI do personagem, fazer map para URI, retirar os ids, chamar os ids na função getComicDescription
 
-  //   const character = await characters.find((character) => (character.name === characterName));
+    const character = characters.find((character) => (character.name === characterName));
 
-  //   const result = await character.comics.items.map((url) => console.log(getComicDescription(((url.resourceURI).substring((url.resourceURI).lastIndexOf('/') + 1)))));
+    const result = character.comics.items.map((url) => console.log(getComicDescription(((url.resourceURI).substring((url.resourceURI).lastIndexOf('/') + 1)))));
 
-  //   setDescription(result);
+    setDescription(result);
 
-  //   return description;
-  // }
+    return description;
+  }
 
   const getCharacters = async () => {
     const result = await getCharacter();
 
     setCharacters(result);
 
+    getDescription();
+
     return characters;
   }
 
 
-  const characterInfo = async () => {
-    const character = await characters.find((character) => (character.name === characterName));
+  const characterInfo = () => {
+    const character = characters.find((character) => (character.name === characterName));
 
     if (!character) {
       return <h3>Não foi possível encontrar este personagem!</h3>
     }
-
-    const result = await character.comics.items.map((url) => getComicDescription(((url.resourceURI).substring((url.resourceURI).lastIndexOf('/') + 1))));
-
-    setDescription(result);
 
     return <div>
       <section>
@@ -67,7 +66,7 @@ const CharacterPage = () => {
             Descrição
           </h4>
           <p>
-            {description}
+            {console.log(description)}
           </p>
         </div>
         )}
