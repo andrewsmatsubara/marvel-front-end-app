@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { accessAction } from "../redux/actions";
 import { Link } from 'react-router-dom';
+import { Button } from "../components/Button";
 
 const LoginPage = ({ accessAction }) => {
   const [privateKeyValue, setPrivateKeyValue] = useState();
@@ -17,14 +18,15 @@ const LoginPage = ({ accessAction }) => {
   }
 
   return (
-    <form className="login-page" >
-      <input type="text" placeholder="private_key" onChange={(e) => inputChange(e)} />
-      <input type="text" placeholder="public_key" onChange={(e) => inputChange(e)} />
+    <form className="login-page" style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
+      <h1>Dados de acesso</h1>
+      <input type="text" placeholder="private_key" onChange={(e) => inputChange(e)} style={{ margin: '10px', width: '400px' }} />
+      <input type="text" placeholder="public_key" onChange={(e) => inputChange(e)} style={{ margin: '10px', width: '400px' }} />
       <Link to='/home'>
-        <button
+        <Button style={{ margin: '10px' }}
           onClick={() => accessAction(privateKeyValue, publicKeyValue)}
         >Acessar
-        </button>
+        </Button>
       </Link>
     </form>
   )

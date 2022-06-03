@@ -49,9 +49,9 @@ const CharacterPage = () => {
         <h4>{`${character.name}`}</h4>
         <p>{`${character.description}`}</p>
         <Link to='/home'>
-          <button>
+          <Button>
             Voltar
-          </button>
+          </Button>
         </Link>
       </section>
       <section>
