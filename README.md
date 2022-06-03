@@ -16,7 +16,7 @@ Put a valid Marvel's API private and public access key. Then the user will be re
 
 ## Credits
 
-https://medium.com/reactbrasil/iniciando-com-redux-c14ca7b7dcf
-https://blog.bitsrc.io/create-react-app-without-create-react-app-b0a5806a92
-https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/
+https://medium.com/reactbrasil/iniciando-com-redux-c14ca7b7dcf  
+https://blog.bitsrc.io/create-react-app-without-create-react-app-b0a5806a92  
+https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/  
 https://developer.marvel.com/
