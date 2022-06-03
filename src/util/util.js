@@ -33,20 +33,27 @@ export const createHash = async () => {
 }
 
 export const getCharacter = async () => {
-  try {
-    const timestamp = await getTimestamp();
-    const publicKey = await getPublicKey();
-    const hash = await createHash();
-    const MARVEL_URL = `https://gateway.marvel.com/v1/public/characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
-    const response = await fetch(MARVEL_URL);
-    const result = await response.json();
+  const timestamp = await getTimestamp();
+  const publicKey = await getPublicKey();
+  const hash = await createHash();
+  const MARVEL_URL = `https://gateway.marvel.com/v1/public/characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  const response = await fetch(MARVEL_URL);
+  const result = await response.json();
 
-    if (result && result.code === 'InvalidCredentials') {
-      window.alert('As credenciais estão incorretas!');
-    }
-
-    return result.data.results;
-  } catch (e) {
-    console.log(e.message);
+  if (result && result.code === 'InvalidCredentials') {
+    window.alert('As credenciais estão incorretas!');
   }
+
+  return result.data.results;
+}
+
+export const getComicDescription = async (id) => {
+  const timestamp = await getTimestamp();
+  const publicKey = await getPublicKey();
+  const hash = await createHash();
+  const RESOURCE_URI = `https://gateway.marvel.com/v1/public/comics/${id}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  const response = await fetch(RESOURCE_URI);
+  const result = await response.json();
+
+  return result.data.results[0].description;
 }
