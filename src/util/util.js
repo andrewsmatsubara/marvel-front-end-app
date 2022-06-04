@@ -47,13 +47,15 @@ export const getCharacter = async () => {
   return result.data.results;
 }
 
-export const getComicDescription = async (id) => {
+export const getComic = async (url) => {
   const timestamp = await getTimestamp();
   const publicKey = await getPublicKey();
   const hash = await createHash();
-  const RESOURCE_URI = `https://gateway.marvel.com/v1/public/comics/${id}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  const RESOURCE_URI = `${url}?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
   const response = await fetch(RESOURCE_URI);
   const result = await response.json();
 
-  return result.data.results[0].description;
+  return { thumbnail: `${(result.data.results[0].thumbnail.path)}.${result.data.results[0].thumbnail.extension}`, description: result.data.results[0].description };
 }
+
+// const result = character.comics.items.map((url) => console.log(getComicDescription(((url.resourceURI).substring((url.resourceURI).lastIndexOf('/') + 1)))));
