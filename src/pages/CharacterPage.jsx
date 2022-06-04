@@ -7,29 +7,29 @@ import { Button } from "../components/Button";
 
 const CharacterPage = () => {
   const [characters, setCharacters] = useState([]);
-  const [description, setDescription] = useState('');
+  // const [description, setDescription] = useState('');
 
   const reduxStore = store.getState();
   const characterName = reduxStore.reducers.characterState.newCharacterValue;
 
-  const getDescription = () => {
-    // pegar as resourceURI do personagem, fazer map para URI, retirar os ids, chamar os ids na função getComicDescription
+  // const getDescription = () => {
+  //   // pegar as resourceURI do personagem, fazer map para URI, retirar os ids, chamar os ids na função getComicDescription
 
-    const character = characters.find((character) => (character.name === characterName));
+  //   const character = characters.find((character) => (character.name === characterName));
 
-    const result = character.comics.items.map((url) => console.log(getComicDescription(((url.resourceURI).substring((url.resourceURI).lastIndexOf('/') + 1)))));
+  //   const result = character.comics.items.map((url) => console.log(getComicDescription(((url.resourceURI).substring((url.resourceURI).lastIndexOf('/') + 1)))));
 
-    setDescription(result);
+  //   setDescription(result);
 
-    return description;
-  }
+  //   return description;
+  // }
 
   const getCharacters = async () => {
     const result = await getCharacter();
 
     setCharacters(result);
 
-    getDescription();
+    // getDescription();
 
     return characters;
   }
@@ -66,7 +66,7 @@ const CharacterPage = () => {
             Descrição
           </h4>
           <p>
-            {console.log(description)}
+            {/* {console.log(description)} */}
           </p>
         </div>
         )}
