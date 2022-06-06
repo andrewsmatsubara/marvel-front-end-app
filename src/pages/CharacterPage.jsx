@@ -31,7 +31,7 @@ const CharacterPage = () => {
     setCharacters(result);
   }
 
-  const getComicsDescription = () => {
+  const getComicsDescription = async () => {
     const character = characters.find((character) => (character.name === characterName));
 
 
@@ -39,9 +39,7 @@ const CharacterPage = () => {
       return <h3>Carregando...</h3>
     }
 
-    character.comics.items.map((item) => getComic(item.resourceURI).then((d) => setDescription(([d.description]))));
-
-    console.log(description);
+    character.comics.items.map((item) => getComic(item.resourceURI).then((d) => setDescription((desc) => (d.description !== '' || d.description !== null) ? (desc.includes(d.description) ? [desc] : [...desc, d.description]) : [...desc, d.description])));
   }
 
   // const getComicsThumbnail = () => {
@@ -86,7 +84,7 @@ const CharacterPage = () => {
           <h4>
             Descrição
           </h4>
-          {/* {description !== [] ? console.log(description) : <h3>Carregando...</h3>} */}
+          {description !== [] ? console.log(description) : <h3>Carregando...</h3>}
         </div>
         )}
       </section>
