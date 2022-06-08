@@ -8,12 +8,11 @@ import { Button } from "../components/Button";
 const CharacterCard = () => {
   const [characters, setCharacters] = useState([]);
   const [description, setDescription] = useState([]);
-  // const [thumbnail, setThumbnail] = useState([]);
+  const [thumbnail, setThumbnail] = useState([]);
 
   const reduxStore = store.getState();
   const characterName = reduxStore.reducers.characterState.newCharacterValue;
   const character = characters.find((character) => (character.name === characterName));
-  // const descriptionArray = [];
 
   const getCharacters = async () => {
     const result = await getCharacter();
@@ -31,11 +30,15 @@ const CharacterCard = () => {
     setDescription(result);
   }
 
-  // const getComicsThumbnail = () => {
-  //   const result = characters.map((character) => getComic(character.comics.items.resourceURI).then((comic) => comic.thumbnail));
+  const getComicsThumbnail = async () => {
+    if (!character) {
+      return <h3>Carregando...</h3>
+    }
 
-  //   setThumbnail(result);
-  // }
+    const result = await Promise.all(character.comics.items.map(async (item) => await getComic(item.resourceURI).then((d) => d.thumbnail)));
+
+    setThumbnail(result);
+  }
 
 
   const characterInfo = () => {
@@ -60,7 +63,7 @@ const CharacterCard = () => {
         <h2>Fascículos</h2>
         {character.comics.items.map((item, i) => <div key={`${item.name}-${i}`} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            {/* {thumbnail.map((thumb) => console.log(thumb))} */}
+            {thumbnail ? <img src={thumbnail[i]} /> : <h3>Carregando</h3>}
             <h4>
               Título
             </h4>
@@ -84,6 +87,7 @@ const CharacterCard = () => {
 
   useEffect(() => {
     getComicsDescription();
+    getComicsThumbnail();
     // getComicsThumbnail();
   }, [character]);
 
