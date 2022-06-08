@@ -12,6 +12,8 @@ const CharacterCard = () => {
 
   const reduxStore = store.getState();
   const characterName = reduxStore.reducers.characterState.newCharacterValue;
+  const character = characters.find((character) => (character.name === characterName));
+  // const descriptionArray = [];
 
   const getCharacters = async () => {
     const result = await getCharacter();
@@ -20,25 +22,13 @@ const CharacterCard = () => {
   }
 
   const getComicsDescription = async () => {
-    const descriptionArray = [];
-    const character = characters.find((character) => (character.name === characterName));
-
-
     if (!character) {
       return <h3>Carregando...</h3>
     }
 
-    // character.comics.items.map((item) => getComic(item.resourceURI).then((d) => setDescription((desc) => (d.description !== '' || d.description !== null) ? (desc.includes(d.description) ? [desc] : [...desc, d.description]) : [...desc, d.description])));
+    const result = await Promise.all(character.comics.items.map(async (item) => await getComic(item.resourceURI).then((d) => d.description)));
 
-    character.comics.items.map(async (item) => await getComic(item.resourceURI).then((d) => descriptionArray.push(d.description)));
-
-    if (descriptionArray.length === 0) {
-      console.log('Carregando!');
-    }
-
-    setDescription(descriptionArray);
-
-    console.log(description);
+    setDescription(result);
   }
 
   // const getComicsThumbnail = () => {
@@ -49,13 +39,11 @@ const CharacterCard = () => {
 
 
   const characterInfo = () => {
-    const character = characters.find((character) => (character.name === characterName));
-
     if (!character) {
       return <h3>Não foi possível encontrar este personagem!</h3>
     }
 
-    return <div>
+    return <div key={`${character.name}-info`}>
       <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
         <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} style={{ width: '200px' }} />
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px' }}>
@@ -70,7 +58,7 @@ const CharacterCard = () => {
       </section>
       <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <h2>Fascículos</h2>
-        {character.comics.items.map((item) => <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+        {character.comics.items.map((item, i) => <div key={`${item.name}-${i}`} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             {/* {thumbnail.map((thumb) => console.log(thumb))} */}
             <h4>
@@ -83,7 +71,7 @@ const CharacterCard = () => {
           <h4>
             Descrição
           </h4>
-          {description.map((desc) => <p>{desc}</p>)}
+          {description !== [] ? <p>{description[i]}</p> : <h3>Carregando</h3>}
         </div>
         )}
       </section>
@@ -97,7 +85,11 @@ const CharacterCard = () => {
   useEffect(() => {
     getComicsDescription();
     // getComicsThumbnail();
-  }, [characters]);
+  }, [character]);
+
+  // useEffect(() => {
+  //   setDescription(descriptionArray);
+  // }, [descriptionArray]);
 
   return (
     <div className="character-card">
