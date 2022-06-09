@@ -4,6 +4,7 @@ import { getCharacter } from '../util/util';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { characterAction } from "../redux/actions";
+// import '../css/table.css'
 
 const Table = ({ characterAction }) => {
   const [characters, setCharacters] = useState([]);
@@ -12,8 +13,6 @@ const Table = ({ characterAction }) => {
     const result = await getCharacter();
 
     setCharacters(result);
-
-    return characters;
   }
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const Table = ({ characterAction }) => {
   }, []);
 
   return (
-    <table>
+    <table className="character-table">
       <tbody>
         <tr>
           <th style={{ border: '1px solid black' }} >Nome</th>
