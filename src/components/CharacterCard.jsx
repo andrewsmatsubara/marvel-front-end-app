@@ -68,12 +68,15 @@ const CharacterCard = () => {
               Título
             </h4>
             <p>
-              {item.name}
+              {item.name.split('#')[0]}
+            </p>
+            <h4>
+              Número de capa
+            </h4>
+            <p>
+              {`#${item.name.split('#')[1]}`}
             </p>
           </div>
-          <h4>
-            Descrição
-          </h4>
           {description !== [] ? <p>{description[i]}</p> : <h3>Carregando</h3>}
         </div>
         )}
@@ -88,12 +91,7 @@ const CharacterCard = () => {
   useEffect(() => {
     getComicsDescription();
     getComicsThumbnail();
-    // getComicsThumbnail();
   }, [character]);
-
-  // useEffect(() => {
-  //   setDescription(descriptionArray);
-  // }, [descriptionArray]);
 
   return (
     <div className="character-card">
