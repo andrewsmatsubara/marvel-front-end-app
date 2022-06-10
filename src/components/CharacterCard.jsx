@@ -47,48 +47,50 @@ const CharacterCard = () => {
     }
 
     return <div key={`${character.name}-info`}>
-      <section style={{ display: 'flex', flexDirection: 'row' }}>
-        <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} style={{ width: '200px' }} />
+      <section style={{ display: 'flex', flexDirection: 'row', width: '80%', backgroundColor: '#BFCBC2', borderRadius: '10px' }}>
+        <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} style={{ display: 'flex', width: '200px', borderRadius: '10px' }} />
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px' }}>
-          <h4>{`${character.name}`}</h4>
+          <h3>{`${character.name}`}</h3>
           <p>{`${character.description}`}</p>
         </div>
-        <Link to='/home'>
-          <Button>
-            Voltar
-          </Button>
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Link to='/home'>
+            <Button>
+              Voltar
+            </Button>
+          </Link>
+        </div>
       </section>
       <section style={{ display: 'flex', flexDirection: 'column' }}>
         <h2>Fascículos</h2>
-        {character.comics.items.map((item, i) => <div key={`${item.name}-${i}`} style={{ display: 'flex', flexDirection: 'row', border: '1px solid red' }}>
+        {character.comics.items.map((item, i) => <div key={`${item.name}-${i}`} style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'lightgray', marginBottom: '10px', borderRadius: '10px', width: '80%' }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              {thumbnail ? <img src={thumbnail[i]} style={{ display: 'flex', width: '100px' }} /> : <h3>Carregando</h3>}
+              {thumbnail ? <img src={thumbnail[i]} style={{ display: 'flex', width: '100px', borderRadius: '10px' }} /> : <h3>Carregando</h3>}
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid red' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '10px' }}>
                       <h4>
                         Título
                       </h4>
-                      <p>
+                      <p style={{ display: 'flex', marginLeft: '10px' }}>
                         {item.name.split('#')[0]}
                       </p>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid red' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center', marginLeft: '10px' }}>
                       <h4>
                         Número de capa
                       </h4>
-                      <p>
+                      <p style={{ display: 'flex', marginLeft: '10px' }}>
                         {`#${item.name.split('#')[1]}`}
                       </p>
                     </div>
                   </div>
                 </div>
-                {description !== [] ? <p style={{ display: 'flex' }}>{description[i]}</p> : <h3>Carregando</h3>}
+                {description !== [] ? <p style={{ display: 'flex', marginLeft: '10px' }}>{description[i]}</p> : <h3>Carregando</h3>}
               </div>
             </div>
           </div>
