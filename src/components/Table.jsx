@@ -4,7 +4,6 @@ import { getCharacter } from '../util/util';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { characterAction } from "../redux/actions";
-// import '../css/table.css'
 
 const Table = ({ characterAction }) => {
   const [characters, setCharacters] = useState([]);
@@ -13,6 +12,11 @@ const Table = ({ characterAction }) => {
     const result = await getCharacter();
 
     setCharacters(result);
+  }
+
+  const setCharacterLocalStorage = (character) => {
+    localStorage.setItem('character-name', character.name);
+    characterAction(character.name)
   }
 
   useEffect(() => {
@@ -30,7 +34,7 @@ const Table = ({ characterAction }) => {
         {characters.map((character) => <tr key={`${character.name}-info`}>
 
           <td key={`${character.name}`} style={{ border: '1px solid black' }}>
-            <Link to='/character' onClick={() => characterAction(character.name)}>
+            <Link to='/character' onClick={() => setCharacterLocalStorage(character)}>
               {character.name}
             </Link>
           </td>

@@ -17,6 +17,12 @@ const LoginPage = ({ accessAction }) => {
     }
   }
 
+  const setItemToLocalStorage = () => {
+    accessAction(privateKeyValue, publicKeyValue);
+    localStorage.setItem('privateKey', privateKeyValue);
+    localStorage.setItem('publicKey', publicKeyValue);
+  }
+
   return (
     <form className="login-page" style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
       <h1>Dados de acesso</h1>
@@ -24,7 +30,7 @@ const LoginPage = ({ accessAction }) => {
       <input type="text" placeholder="public_key" onChange={(e) => inputChange(e)} style={{ margin: '10px', width: '400px' }} />
       <Link to='/home'>
         <Button style={{ margin: '10px' }}
-          onClick={() => accessAction(privateKeyValue, publicKeyValue)}
+          onClick={() => setItemToLocalStorage()}
         >Acessar
         </Button>
       </Link>

@@ -1,4 +1,4 @@
-import { store } from '../redux/store/index'
+// import { store } from '../redux/store/index'
 import CryptoJS from 'crypto-js';
 
 export const getTimestamp = async () => {
@@ -11,15 +11,15 @@ export const getTimestamp = async () => {
 }
 
 export const getPublicKey = async () => {
-  const state = store.getState();
+  const publicKey = localStorage.getItem('publicKey');
 
-  return state.reducers.accessState.newPublicValue;
+  return publicKey;
 }
 
 export const getPrivateKey = async () => {
-  const state = store.getState();
+  const privateKey = localStorage.getItem('privateKey');
 
-  return state.reducers.accessState.newPrivateValue;
+  return privateKey;
 }
 
 export const createHash = async () => {
