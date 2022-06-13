@@ -11,11 +11,16 @@ const Table = ({ characterAction }) => {
   const getCharacters = async () => {
     const result = await getCharacter();
 
+    if (!result) {
+      setCharacters('');
+    }
+
     setCharacters(result);
   }
 
   const setCharacterLocalStorage = (character) => {
     localStorage.setItem('character-name', character.name);
+
     characterAction(character.name)
   }
 
@@ -24,25 +29,26 @@ const Table = ({ characterAction }) => {
   }, []);
 
   return (
-    <table className="character-table">
-      <tbody>
-        <tr>
-          <th style={{ border: '1px solid black' }} >Nome</th>
-          <th style={{ border: '1px solid black' }}>Descrição</th>
-          <th style={{ border: '1px solid black' }}>Última atualização</th>
-        </tr>
-        {characters.map((character) => <tr key={`${character.name}-info`}>
+    !characters ? <h3 style={{ display: 'flex', justifyContent: 'center' }}>Acesso inválido</h3> :
+      <table className="character-table">
+        <tbody>
+          <tr>
+            <th style={{ border: '1px solid black' }} >Nome</th>
+            <th style={{ border: '1px solid black' }}>Descrição</th>
+            <th style={{ border: '1px solid black' }}>Última atualização</th>
+          </tr>
+          {characters.map((character) => <tr key={`${character.name}-info`}>
 
-          <td key={`${character.name}`} style={{ border: '1px solid black' }}>
-            <Link to='/character' onClick={() => setCharacterLocalStorage(character)}>
-              {character.name}
-            </Link>
-          </td>
-          <td key={`${character.name}-description`} style={{ border: '1px solid black' }}>{character.description}</td>
-          <td key={`${character.name}-last-modification`} style={{ border: '1px solid black' }}>{character.modified}</td>
-        </tr>)}
-      </tbody>
-    </table>
+            <td key={`${character.name}`} style={{ border: '1px solid black' }}>
+              <Link to='/character' onClick={() => setCharacterLocalStorage(character)}>
+                {character.name}
+              </Link>
+            </td>
+            <td key={`${character.name}-description`} style={{ border: '1px solid black' }}>{character.description}</td>
+            <td key={`${character.name}-last-modification`} style={{ border: '1px solid black' }}>{character.modified}</td>
+          </tr>)}
+        </tbody>
+      </table>
   )
 }
 

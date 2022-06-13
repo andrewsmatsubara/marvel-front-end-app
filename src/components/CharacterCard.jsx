@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { store } from "../redux/store";
+// import { store } from "../redux/store";
 import { getCharacter, getComic } from "../util/util";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
