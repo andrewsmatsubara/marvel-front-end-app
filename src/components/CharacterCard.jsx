@@ -86,7 +86,7 @@ const CharacterCard = () => {
                         Número de capa
                       </h4>
                       <p style={{ display: 'flex', marginLeft: '10px' }}>
-                        {`#${item.name.split('#')[1]}`}
+                        {item.name.split('#')[1] ? `#${item.name.split('#')[1]}` : ''}
                       </p>
                     </div>
                   </div>
