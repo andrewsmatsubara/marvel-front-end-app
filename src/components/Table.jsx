@@ -40,15 +40,13 @@ const Table = ({ characterAction }) => {
 
   const numberClickHandler = () => {
     document.addEventListener('click', (event) => {
-      if (typeof Number.parseInt(event.target.textContent) === 'number') {
+      if (event.target.className === 'number-list') {
         localStorage.setItem('id', event.target.textContent);
 
         const id = indexOffset.find((i) => localStorage.getItem('id') == i.index);
 
         getCharacters(id.offset);
-
       }
-
     });
   }
 
@@ -81,7 +79,7 @@ const Table = ({ characterAction }) => {
         </table>
         <ul style={{ display: 'flex', flexDirection: 'row', width: '60%', flexWrap: 'wrap', justifyContent: 'space-around', margin: '0px', padding: '0px' }}>
           {!indexOffset ? <h3>Carregando</h3> : indexOffset.map((i) => <Link to="/home" key={`${i.index}-link`} onClick={() => numberClickHandler()}>
-            <li style={{ display: 'flex', listStyleType: 'none', margin: '10px' }} key={`id-${i.index}`}>{i.index}</li>
+            <li style={{ display: 'flex', listStyleType: 'none', margin: '10px' }} className='number-list' key={`id-${i.index}`}>{i.index}</li>
           </Link>)}
         </ul>
       </div>
