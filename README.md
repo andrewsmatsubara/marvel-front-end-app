@@ -1,4 +1,4 @@
-# Printi Front End Technical Test
+# Marvel Front End Application
 
 ## Description
 

@@ -40,11 +40,15 @@ const Table = ({ characterAction }) => {
 
   const numberClickHandler = () => {
     document.addEventListener('click', (event) => {
-      localStorage.setItem('id', event.target.textContent);
-      
-      const id = indexOffset.find((i) => localStorage.getItem('id') == i.index);
-  
-      getCharacters(id.offset);
+      if (typeof Number.parseInt(event.target.textContent) === 'number') {
+        localStorage.setItem('id', event.target.textContent);
+
+        const id = indexOffset.find((i) => localStorage.getItem('id') == i.index);
+
+        getCharacters(id.offset);
+
+      }
+
     });
   }
 
