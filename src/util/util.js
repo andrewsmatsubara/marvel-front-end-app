@@ -32,12 +32,12 @@ export const createHash = async () => {
   return hash;
 }
 
-export const getCharacter = async () => {
+export const getCharacter = async (offset) => {
   try {
     const timestamp = await getTimestamp();
     const publicKey = await getPublicKey();
     const hash = await createHash();
-    const MARVEL_URL = `https://gateway.marvel.com/v1/public/characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+    const MARVEL_URL = `https://gateway.marvel.com/v1/public/characters?limit=10&offset=${offset}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
     const response = await fetch(MARVEL_URL);
 
     if (response.ok === false) {
