@@ -9,15 +9,15 @@ const CharacterCard = () => {
   const [characters, setCharacters] = useState([]);
   const [description, setDescription] = useState([]);
   const [thumbnail, setThumbnail] = useState([]);
-  
+
   useEffect(() => {
     getCharacters(offset);
   }, []);
-  
+
   useEffect(() => {
     getComicsDescription();
     getComicsThumbnail();
-  }, [character]);
+  }, [characters]);
 
   // const reduxStore = store.getState();
   // const characterName = reduxStore.reducers.characterState.newCharacterValue;
@@ -35,9 +35,9 @@ const CharacterCard = () => {
     if (!character) {
       return <h3>Carregando...</h3>
     }
-    
+
     const result = await Promise.all(character.comics.items.map(async (item) => await getComic(item.resourceURI).then((d) => d.description)));
-    
+
     setDescription(result);
   }
 
@@ -45,7 +45,7 @@ const CharacterCard = () => {
     if (!character) {
       return <h3>Carregando...</h3>
     }
-    
+
     const result = await Promise.all(character.comics.items.map(async (item) => await getComic(item.resourceURI).then((d) => d.thumbnail)));
 
     setThumbnail(result);
