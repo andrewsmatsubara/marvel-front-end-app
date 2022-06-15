@@ -9,6 +9,8 @@ const Table = ({ characterAction }) => {
   const [characters, setCharacters] = useState([]);
   const [indexOffset, setIndexOffset] = useState([]);
 
+  const offset = localStorage.getItem('offset');
+
   const getCharacters = async (offset) => {
     const result = await getCharacter(offset);
 
@@ -53,7 +55,7 @@ const Table = ({ characterAction }) => {
   }
 
   useEffect(() => {
-    getCharacters();
+    getCharacters(offset);
     getIndex();
   }, []);
 

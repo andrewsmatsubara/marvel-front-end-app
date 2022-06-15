@@ -22,9 +22,8 @@ const CharacterCard = () => {
   // const reduxStore = store.getState();
   // const characterName = reduxStore.reducers.characterState.newCharacterValue;
   const characterName = localStorage.getItem('character-name');
-  const character = characters.find((character) => (character.name === characterName));
   const offset = localStorage.getItem('offset');
-
+  const character = characters.find((character) => (character.name === characterName));
 
   const getCharacters = async (offset) => {
     const result = await getCharacter(offset);
