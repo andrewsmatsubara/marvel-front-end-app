@@ -45,6 +45,8 @@ const Table = ({ characterAction }) => {
 
         const id = indexOffset.find((i) => localStorage.getItem('id') == i.index);
 
+        localStorage.setItem('offset', id.offset);
+
         getCharacters(id.offset);
       }
     });
